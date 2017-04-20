@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf8">
+  <title>KalePlayer</title>
+  <link rel="stylesheet" href="../../netdna.bootstrapcdn.com/bootswatch/3.1.1/united/bootstrap.min.css">
+  <link rel="stylesheet" href="../../netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css">
+  <link rel="stylesheet" href="../../netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link href="media/css/dikteeri.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+      <a class="navbar-brand" href="index-2.html">KalePlayer</a>
+    </div>
+
+    <div class="text-center">
+      <div class="col-md-5 col-md-offset-3" style="margin-bottom: 20px">
+        <table style="width:100%">
+          <tr>
+            <td width="25%">
+              <strong>Command</strong>
+            </td>
+            <td width="60%">
+              <textarea id="trans" class="form-control" rows="1" style="background-color: white" ></textarea>
+            </td>
+            <td width="15%">
+              <button id="genaction" onclick="textaction()">action</buttoin>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-6 col-md-offset-3" style="margin-top: 10px; margin-bottom: 20px;">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Music title</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>ไกลแค่ไหนคือใกล้</td>
+              <td id="music1text">หยุด</td>
+              <td><button  onclick="toggle('mymusic1','music1text')" type="button">Play</button></td>
+              <td><button  onclick="reset('mymusic1')" type="button">Reset</button></td>
+              <audio id="mymusic1">
+                <source src="media/music/music1.mp3" type="audio/mpeg">
+              </audio>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>คู่กัน</td>
+              <td id="music2text">หยุด</td>
+              <td><button  onclick="toggle('mymusic2','music2text')" type="button">Play</button></td>
+              <td><button  onclick="reset('mymusic2')" type="button">Reset</button></td>
+              <audio id="mymusic2">
+                <source src="media/music/music2.mp3" type="audio/mpeg">
+              </audio>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>ชะตาชีวิต</td>
+              <td id="music3text">หยุด</td>
+              <td><button  onclick="toggle('mymusic3','music3text')" type="button">Play</button></td>
+              <td><button  onclick="reset('mymusic3')" type="button">Reset</button></td>
+              <audio id="mymusic3">
+                <source src="media/music/music3.mp3" type="audio/mpeg">
+              </audio>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>กะทันหัน</td>
+              <td id="music4text">หยุด</td>
+              <td><button onclick="toggle('mymusic4','music4text')" type="button">Play</button></td>
+              <td><button onclick="reset('mymusic4')" type="button">Reset</button></td>
+              <audio id="mymusic4">
+                <source src="media/music/music4.mp3" type="audio/mpeg">
+              </audio>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>ฝน</td>
+              <td id="music5text">หยุด</td>
+              <td><button onclick="toggle('mymusic5','music5text')" type="button">Play</button></td>
+              <td><button onclick="reset('mymusic5')" type="button">Reset</button></td>
+              <audio id="mymusic5">
+                <source src="media/music/music5.mp3" type="audio/mpeg">
+              </audio>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-4 col-md-offset-4">
+        <div id="recbutton" class="" onclick="toggleListening();"></div>
+        <p id="helptext" class="text-center tiny" style="margin-top: 10px">Click to speak</p>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- /container -->
+
+  <script>
+    function toggle(mymusic , status) {
+      var audio = document.getElementById(mymusic);
+      var stext = document.getElementById(status);
+      if (audio.paused) {
+        stext.innerHTML = "กำลังเล่น";
+        audio.play();
+      }
+      else if(audio.play){
+        stext.innerHTML = "หยุด";
+        audio.pause();
+      }
+    }
+
+    function mplay(mymusic , status) {
+      var audio = document.getElementById(mymusic);
+      var stext = document.getElementById(status);
+        stext.innerHTML = "กำลังเล่น";
+        audio.play();
+    }
+
+    function mpause(mymusic , status) {
+      var audio = document.getElementById(mymusic);
+      var stext = document.getElementById(status);
+        stext.innerHTML = "หยุด";
+        audio.pause();
+    }
+
+    function reset(mymusic){
+      var audio = document.getElementById(mymusic);
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function textaction(){
+      var mtext = document.getElementById("trans").value;
+      if(mtext == "เล่นเพลงไกลแค่ไหนคือใกล้" || mtext == "เล่นไกลแค่ไหนคือใกล้"){
+        mplay('mymusic1','music1text');
+      }
+      else if(mtext == "เล่นเพลงคู่กัน" || mtext == "เล่นคู่กัน"){
+        mplay('mymusic2','music2text');
+      }
+      else if(mtext == "เล่นเพลงชะตาชีวิต" || mtext == "เล่นชะตาชีวิต"){
+        mplay('mymusic3','music3text');
+      }
+      else if(mtext == "เล่นเพลงกะทันหัน" || mtext == "เล่นกะทันหัน"){
+        mplay('mymusic4','music4text');
+      }
+      else if(mtext == "เล่นเพลงฝน" || mtext == "เล่นฝน"){
+        mplay('mymusic5','music5text');
+      }
+
+      else if(mtext == "หยุดเล่นเพลงไกลแค่ไหนคือใกล้" || mtext == "หยุดเพลงไกลแค่ไหนคือใกล้" ){
+        mpause('mymusic1','music1text');
+      }
+      else if(mtext == "หยุดเล่นเพลงคู่กัน" || mtext == "หยุดเพลงคู่กัน" ){
+        mpause('mymusic2','music2text');
+      }
+      else if(mtext == "หยุดเล่นเพลงชะตาชีวิต" || mtext == "หยุดเพลงชะตาชีวิต" ){
+        mpause('mymusic3','music3text');
+      }
+      else if(mtext == "หยุดเล่นเพลงกะทันหัน" || mtext == "หยุดเพลงกะทันหัน" ){
+        mpause('mymusic4','music4text');
+      }
+      else if(mtext == "หยุดเล่นเพลงฝน" || mtext == "หยุดเพลงฝน" ){
+        mpause('mymusic5','music5text');
+      }
+
+      else if(mtext == "หยุดเล่น" || mtext == "หยุด" ){
+        mpause('mymusic1','music1text');
+        mpause('mymusic2','music2text');
+        mpause('mymusic3','music3text');
+        mpause('mymusic4','music4text');
+        mpause('mymusic5','music5text');
+      }
+      else if(mtext == "เปลี่ยนเพลง" ){
+        var i;
+        for(i=1;i<=5;i++){
+          var temp = 'mymusic'+i;
+          var mobject = document.getElementById(temp);
+            if(mobject.play){
+              mobject.pause();
+              break;
+            }
+        }
+      }
+    }
+
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="media/js/libs/jquery-1.10.1.min.html">\x3C/script>')
+  </script>
+  <script src="../../netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="media/js/libs/dictate.js/lib/dictate.js"></script>
+  <script src="media/js/libs/dictate.js/lib/recorder.js"></script>
+  <script src="media/js/libs/dictate.js/lib/speex.min.js"></script>
+  <script src="media/js/libs/notify-combined.min.js"></script>
+  <script src="media/js/libs/jquery.cookieBar.js"></script>
+  <script src="media/js/dikteeri.js"></script>
+
+</body>
+
+
+</html>
