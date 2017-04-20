@@ -126,10 +126,12 @@
         audio.pause();
     }
 
-    function reset(mymusic){
+    function reset(mymusic, status){
       var audio = document.getElementById(mymusic);
+      var stext = document.getElementById(status);
+      stext.innerHTML = "หยุด";
       audio.currentTime = 0;
-      audio.play();
+      audio.pause();
     }
 
     function textaction(){
@@ -151,27 +153,27 @@
       }
 
       else if(mtext == "หยุดเล่นเพลงไกลแค่ไหนคือใกล้" || mtext == "หยุดเพลงไกลแค่ไหนคือใกล้" ){
-        mpause('mymusic1','music1text');
+        reset('mymusic1','music1text');
       }
       else if(mtext == "หยุดเล่นเพลงคู่กัน" || mtext == "หยุดเพลงคู่กัน" ){
-        mpause('mymusic2','music2text');
+        reset('mymusic2','music2text');
       }
       else if(mtext == "หยุดเล่นเพลงชะตาชีวิต" || mtext == "หยุดเพลงชะตาชีวิต" ){
-        mpause('mymusic3','music3text');
+        reset('mymusic3','music3text');
       }
       else if(mtext == "หยุดเล่นเพลงกะทันหัน" || mtext == "หยุดเพลงกะทันหัน" ){
-        mpause('mymusic4','music4text');
+        reset('mymusic4','music4text');
       }
       else if(mtext == "หยุดเล่นเพลงฝน" || mtext == "หยุดเพลงฝน" ){
-        mpause('mymusic5','music5text');
+        reset('mymusic5','music5text');
       }
 
       else if(mtext == "หยุดเล่น" || mtext == "หยุด" ){
-        mpause('mymusic1','music1text');
-        mpause('mymusic2','music2text');
-        mpause('mymusic3','music3text');
-        mpause('mymusic4','music4text');
-        mpause('mymusic5','music5text');
+        reset('mymusic1','music1text');
+        reset('mymusic2','music2text');
+        reset('mymusic3','music3text');
+        reset('mymusic4','music4text');
+        reset('mymusic5','music5text');
       }
       else if(mtext == "เปลี่ยนเพลง" ){
         var i;
@@ -180,7 +182,7 @@
           var temp2 = ('music'.concat(i).concat('text'));
           var mobject = document.getElementById(temp);
             if(!mobject.paused){
-              mpause(temp,temp2);
+              reset(temp,temp2);
               if(!(temp == "mymusic5")){
                 var temp3 = 'mymusic'.concat(i+1);
                 var temp4 = ('music'.concat(i+1).concat('text'));
