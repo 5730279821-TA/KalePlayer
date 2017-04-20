@@ -49,8 +49,6 @@
               <td>1</td>
               <td>ไกลแค่ไหนคือใกล้</td>
               <td id="music1text">หยุด</td>
-              <td><button  onclick="toggle('mymusic1','music1text')" type="button">Play</button></td>
-              <td><button  onclick="reset('mymusic1')" type="button">Reset</button></td>
               <audio id="mymusic1">
                 <source src="media/music/music1.mp3" type="audio/mpeg">
               </audio>
@@ -59,8 +57,6 @@
               <td>2</td>
               <td>คู่กัน</td>
               <td id="music2text">หยุด</td>
-              <td><button  onclick="toggle('mymusic2','music2text')" type="button">Play</button></td>
-              <td><button  onclick="reset('mymusic2')" type="button">Reset</button></td>
               <audio id="mymusic2">
                 <source src="media/music/music2.mp3" type="audio/mpeg">
               </audio>
@@ -69,8 +65,6 @@
               <td>3</td>
               <td>ชะตาชีวิต</td>
               <td id="music3text">หยุด</td>
-              <td><button  onclick="toggle('mymusic3','music3text')" type="button">Play</button></td>
-              <td><button  onclick="reset('mymusic3')" type="button">Reset</button></td>
               <audio id="mymusic3">
                 <source src="media/music/music3.mp3" type="audio/mpeg">
               </audio>
@@ -79,8 +73,6 @@
               <td>4</td>
               <td>กะทันหัน</td>
               <td id="music4text">หยุด</td>
-              <td><button onclick="toggle('mymusic4','music4text')" type="button">Play</button></td>
-              <td><button onclick="reset('mymusic4')" type="button">Reset</button></td>
               <audio id="mymusic4">
                 <source src="media/music/music4.mp3" type="audio/mpeg">
               </audio>
@@ -89,8 +81,6 @@
               <td>5</td>
               <td>ฝน</td>
               <td id="music5text">หยุด</td>
-              <td><button onclick="toggle('mymusic5','music5text')" type="button">Play</button></td>
-              <td><button onclick="reset('mymusic5')" type="button">Reset</button></td>
               <audio id="mymusic5">
                 <source src="media/music/music5.mp3" type="audio/mpeg">
               </audio>
@@ -116,7 +106,7 @@
         stext.innerHTML = "กำลังเล่น";
         audio.play();
       }
-      else if(audio.play){
+      else{
         stext.innerHTML = "หยุด";
         audio.pause();
       }
@@ -186,10 +176,19 @@
       else if(mtext == "เปลี่ยนเพลง" ){
         var i;
         for(i=1;i<=5;i++){
-          var temp = 'mymusic'+i;
+          var temp = 'mymusic'.concat(i);
+          var temp2 = ('music'.concat(i).concat('text'));
           var mobject = document.getElementById(temp);
-            if(mobject.play){
-              mobject.pause();
+            if(!mobject.paused){
+              mpause(temp,temp2);
+              if(!(temp == "mymusic5")){
+                var temp3 = 'mymusic'.concat(i+1);
+                var temp4 = ('music'.concat(i+1).concat('text'));
+                mplay(temp3,temp4);
+              }
+              else{
+                mplay('mymusic1','music1text');
+              }
               break;
             }
         }
